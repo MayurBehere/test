@@ -1,18 +1,19 @@
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
 import { useAuth } from "../context/AuthContext"; // Replace with your actual auth context
 
 const PrivateRoute = ({ children }) => {
-  const navigate = useNavigate();
   const { currentUser } = useAuth(); // Get the authenticated user from context
 
-  useEffect(() => {
-    if (!currentUser) {
-      navigate("/login"); // Redirect to login if not authenticated
-    }
-  }, [currentUser, navigate]);
+  // --- AUTH CHECK DISABLED FOR DEVELOPMENT ---
+  // const navigate = useNavigate();
+  // useEffect(() => {
+  //   if (!currentUser) {
+  //     navigate("/login"); // Redirect to login if not authenticated
+  //   }
+  // }, [currentUser, navigate]);
 
-  return currentUser ? children : null; // Render children if authenticated
+  // return currentUser ? children : null; // Render children if authenticated
+  return children; // Allow access without authentication
 };
 
 export default PrivateRoute;
